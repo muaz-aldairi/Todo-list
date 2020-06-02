@@ -8,105 +8,102 @@
 // 6. include set method 
 // 7. define a list 
 
-class linkedList {
+class linkedList { // declaring Linked List class
     constructor(){ 
-        this.head= this.tail= null
+        this.head= this.tail= null // track is head or tail equals null
     } 
+    // add to the end of list / tail
     append(value) {
+        // if the list is empty 
         if (!this.tail){
-            this.head=this.tail=new Node(value)
+            this.head=this.tail=new Node(value) // adds new value to the list if empty
         }
     
     else { 
-        let oldTail=this.tail
-        this.tail=new Node(value)
-        oldTail.next=this.tail
-        this.tail.prev=oldTail
+        let oldTail=this.tail // capture current tail node
+        this.tail=new Node(value) // set new value to tail
+        oldTail.next=this.tail // old tail points to new tail
+        this.tail.prev=oldTail // new tail points to old tail
     }
 }
-
+// add to beginning of list / head
 prepend(value) {
+    // if the list is empty 
     if (!this.head){ 
-        this.head=this.tail=new Node(value)
+        this.head=this.tail=new Node(value) // adds new value to the list if empty
     }
     else {
-        let oldHead=this.head
-        this.head=new Node(value)
-        oldHead.prev=this.head
-        this.head.next=oldHead
+        let oldHead=this.head // capture current head node
+        this.head=new Node(value) // set new value to head
+        oldHead.prev=this.head // old head points to new head
+        this.head.next=oldHead // new head points to old head
     }
 
 
 }
-
-deleteHead() {
+// removes the head of the list
+deleteHead() {  // if the list is empty 
     if(!this.head) {
-      return null
+      return null // if no head - list is empty, return null
     }
 
     else {
-        let removeHead=this.head
-        if(this.head===this.tail){
-            this.head=this.tail=null
+        let removeHead=this.head // remove value of head from list
+        // if just 1 node left in list
+        if(this.head===this.tail) {  // if head is also tail, 1 node
+            this.head=this.tail=null  // set to null
         }
         else { 
-            this.head=this.head.next
-            this.head.prev=null
+            this.head=this.head.next // clean up reference to next - sets the head to the previous head
+            this.head.prev=null // removes previous pointer
         }
-        return removeHead.value
+        return removeHead.value // removes the value of head
     }
 
 }
-
-deleteTail() {
+// removes the tail of the list 
+deleteTail() { // if the list is empty 
     if(!this.tail) {
-      return null
+      return null // if no tail - list is empty, return null
     }
 
     else {
-        let removeTail=this.tail
-        if(this.head===this.tail){
-            this.head=this.tail=null
+        let removeTail=this.tail // remove value of tail from list
+        // if just 1 node left in list
+        if(this.head===this.tail){ // if head is also tail, 1 node
+            this.head=this.tail=null // set to null
         }
         else { 
-            this.tail=this.tail.prev
-            this.tail.next=null
+            this.tail=this.tail.prev // clean up reference to previous - sets the tail to the previous tail
+            this.tail.next=null // removes previous pointer 
         }
-        return removeTail.value
+        return removeTail.value // removes the value of tail
     }
 
 }
 
-search (value) {let currentNode=this.head
-while (currentNode){ 
-if (currentNode.value===value) {
-    return currentNode
+search (value) {// searched the list
+let currentNode=this.head // start at head then traverse through list 
+while (currentNode){  // while have current node
+if (currentNode.value===value) { // current node value is equal to value passed in
+    return currentNode // return the value of current node
 }
-currentNode=currentNode.next
+currentNode=currentNode.next // if not equal move on to the next node
 }
-return null 
+return null  //  if traverse entire linked list and don't find value return null
 }
 
 }
-class Node {
-    constructor(value, prev, next) {
-        this.value=value
-        this.prev=prev || null
-        this.next=next || null 
+class Node { // declaring Node class
+    constructor(value, prev, next) { // node constructor takes 3 parameters
+        this.value=value // initialise value
+        this.prev=prev || null // previous node or null
+        this.next=next || null // next node or null
     }
     
 }
 
 let list = new linkedList()
-
-list.append(1776)
-
-
-list.append("lincoln")
-
-list.prepend("one")
-
-console.log(list)
 
 list.append(1) // adding elements to tail of LinkedList
 list.append(2)
